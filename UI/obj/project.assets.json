@@ -2,6 +2,33 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "BL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "DL": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/BL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BL.dll": {}
+        }
+      },
+      "DL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/DL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DL.dll": {}
+        }
+      },
       "Models/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -15,6 +42,16 @@
     }
   },
   "libraries": {
+    "BL/1.0.0": {
+      "type": "project",
+      "path": "../BL/BL.csproj",
+      "msbuildProject": "../BL/BL.csproj"
+    },
+    "DL/1.0.0": {
+      "type": "project",
+      "path": "../DL/DL.csproj",
+      "msbuildProject": "../DL/DL.csproj"
+    },
     "Models/1.0.0": {
       "type": "project",
       "path": "../Models/Models.csproj",
@@ -23,6 +60,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "BL >= 1.0.0",
       "Models >= 1.0.0"
     ]
   },
@@ -61,6 +99,9 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\owner\\RevatureProjects\\Project-Zero\\P0-Peterclaver-Kimuli\\BL\\BL.csproj": {
+              "projectPath": "C:\\Users\\owner\\RevatureProjects\\Project-Zero\\P0-Peterclaver-Kimuli\\BL\\BL.csproj"
+            },
             "C:\\Users\\owner\\RevatureProjects\\Project-Zero\\P0-Peterclaver-Kimuli\\Models\\Models.csproj": {
               "projectPath": "C:\\Users\\owner\\RevatureProjects\\Project-Zero\\P0-Peterclaver-Kimuli\\Models\\Models.csproj"
             }

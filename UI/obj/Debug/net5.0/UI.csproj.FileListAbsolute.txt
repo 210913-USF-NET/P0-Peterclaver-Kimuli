@@ -36,3 +36,7 @@ C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\obj\Debug\
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\obj\Debug\net5.0\ref\UI.dll
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\obj\Debug\net5.0\UI.pdb
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\obj\Debug\net5.0\UI.genruntimeconfig.cache
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\BL.dll
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\DL.dll
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\BL.pdb
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\DL.pdb
