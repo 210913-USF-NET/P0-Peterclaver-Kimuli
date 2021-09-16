@@ -24,7 +24,7 @@ namespace UI
                         Console.WriteLine("Login");
                         break;
                     case "1":
-                        new SignupMenu(new CBL(RAMRepo.GetInstance())).Start();
+                        new SignupMenu(new CBL(new FileRepo())).Start();
                         break;
                     case "x":
                         Console.WriteLine("Exiting...\n");
