@@ -24,7 +24,7 @@ namespace Models
         public string Password { get; set; }
 
         public override string ToString(){
-            return $"Name: {this.Name}";
+            return $"Name: {this.Name}, Email:{this.Email}\n";
         }
     }
 }
