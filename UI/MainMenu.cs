@@ -12,10 +12,10 @@ namespace UI
             string input = "";
 
             do{
-                Console.WriteLine("Welcome to the Shopping App!");
+                Console.WriteLine("Welcome to the Shopping App! We hope you have the best experience.\n");
                 Console.WriteLine("Have an account? Type 0 to Login.");
                 Console.WriteLine("No account? Type 1 to Sign up.");
-                Console.WriteLine("Or you can type x to Sign up.\n");
+                Console.WriteLine("Or you can type x to Exit.");
 
                 input = Console.ReadLine();
 
@@ -31,7 +31,7 @@ namespace UI
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Please type the right input");
+                        Console.WriteLine("Please type the right input\n");
                         break;
                 }
 

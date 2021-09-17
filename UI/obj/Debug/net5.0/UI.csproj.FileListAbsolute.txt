@@ -40,3 +40,6 @@ C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\DL.dll
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\BL.pdb
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\DL.pdb
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\Serilog.dll
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\UI\bin\Debug\net5.0\Serilog.Sinks.File.dll

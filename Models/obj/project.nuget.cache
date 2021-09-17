@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "9FYfpibRsk4pGh1lh4oUckTDGWxXKlKkwqBPF7gh4BGOR8iv/x+JmkX5CzHQjC4bLvcYDydVQDoPislC+Ja3/A==",
+  "dgSpecHash": "O/s7Lokrjmfkm0f/rcFnHK2N6ogx5xeLy5dhHOvXqtJV1eWXQDcrZLEZIHMu70ZhCK0qbVfGHKwBnPWl4MQnpQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\owner\\RevatureProjects\\Project-Zero\\P0-Peterclaver-Kimuli\\Models\\Models.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\owner\\.nuget\\packages\\serilog\\2.10.0\\serilog.2.10.0.nupkg.sha512"
+  ],
   "logs": []
 }

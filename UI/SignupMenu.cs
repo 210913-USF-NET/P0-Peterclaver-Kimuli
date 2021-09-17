@@ -2,6 +2,8 @@ using System;
 using Models;
 using BL;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Serilog;
 
 
 namespace UI
@@ -10,6 +12,10 @@ namespace UI
     {
          private IBL _bl;
 
+        /// <summary>
+        /// Repo instance
+        /// </summary>
+        /// <param name="bl">Repo instance</param>
         public SignupMenu(IBL bl)
         {
             _bl = bl;
@@ -19,19 +25,17 @@ namespace UI
             bool exit = false;
             do
             {
-                Console.WriteLine("Sign up");
-                Console.WriteLine("Type 0 to Sign up.");
-                Console.WriteLine("Type 1 to View Customers");
-                Console.WriteLine("Type x to go back\n");
+                Console.WriteLine("\nType A to create an Account... Type x to return to the Main menu.");
+                
 
                 switch (Console.ReadLine())
                 {
-                    case "0":
+                    case "A":
                         CreateCustomer();
                         break;
-                    case "1":
-                        ViewAllCustomers();
-                        break;
+                    // case "1":
+                    //     ViewAllCustomers();
+                    //     break;
                     case "x":
                         exit = true;
                         break;
@@ -42,21 +46,46 @@ namespace UI
             } while (!exit);
         }
 
+        //Creating customer account
         private void CreateCustomer()
         {
-            Console.WriteLine("Please fill in the required information\n");
+            Console.WriteLine("\nPlease fill in the required information");
+
+            Customer newCust = new Customer();
+            name:
             Console.WriteLine("Name: ");
             string name = Console.ReadLine();
-            Console.WriteLine("Email address: ");
-            string email = Console.ReadLine();
+            try{
+                newCust.Name = name;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto name;
+            }
+
+            phonenumber:
             Console.WriteLine("Phone number: ");
             string phonenumber = Console.ReadLine();
-            Console.WriteLine("Zipcode: ");
-            int zipcode = Int32.Parse(Console.ReadLine());
+            try{
+                newCust.Phonenumber = phonenumber;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto phonenumber;
+            }
+            
+            password:
             Console.WriteLine("Password: ");
             string password = Console.ReadLine();
+            try{
+                newCust.Password = password;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto password;
+            }
 
-            Customer newCust = new Customer(name, email, password, phonenumber, zipcode);
+            //Customer newCust = new Customer(name, email, password, phonenumber, zipcode);
             _bl.AddCustomer(newCust);
             Console.WriteLine($"Congratulations! Your account is created: {newCust.ToString()}"); 
         }

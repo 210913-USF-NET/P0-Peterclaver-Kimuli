@@ -10,15 +10,13 @@ namespace DL
         private static RAMRepo _instance;
 
         private RAMRepo(){
-            _customers = new List<Customer>(){
+           /*  _customers = new List<Customer>(){
                 new Customer(){
                     Name = "Peter",
-                    Email = "email@123.com",
                     Phonenumber = "7979696",
-                    Zipcode = 123,
                     Password = "password"
                 }
-            };
+            }; */
         }
 
         public static RAMRepo GetInstance(){
