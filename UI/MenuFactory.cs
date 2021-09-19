@@ -19,5 +19,15 @@ namespace UI
                     return null;
             }
         }
+
+        public static IMenu GetMenu (string menuToReturn, Customer customer)
+        {
+            switch(menuToReturn.ToLower()){
+                case "customerinterface":
+                    return new CustomerInterfaceMenu(customer);
+                default:
+                    return null;
+            }
+        }
     }
 }

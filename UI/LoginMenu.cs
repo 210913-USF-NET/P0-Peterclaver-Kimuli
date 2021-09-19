@@ -52,7 +52,7 @@ namespace UI
             }
             else{
                 Log.Information("\nSuccessfully Logged in!");
-                new CustomerInterfaceMenu(loggedCustomer).Start();
+                MenuFactory.GetMenu("customerinterface", loggedCustomer).Start();
             }
         }
     }

@@ -101,7 +101,7 @@ namespace UI
             Console.WriteLine($"Congratulations! Your account is created: {newCust.Name}");
             Log.Information("Account successfully created!"); 
 
-            new CustomerInterfaceMenu(newCust).Start();
+            MenuFactory.GetMenu("customerinterface", newCust).Start();
         }
 
         private void ViewAllCustomers()
