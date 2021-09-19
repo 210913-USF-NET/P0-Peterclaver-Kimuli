@@ -21,10 +21,10 @@ namespace UI
 
                 switch(input){
                     case "0":
-                        new LoginMenu(new CBL(new FileRepo())).Start();
+                        MenuFactory.GetMenu("login").Start();
                         break;
                     case "1":
-                        new SignupMenu(new CBL(new FileRepo())).Start();
+                        MenuFactory.GetMenu("signup").Start();
                         break;
                     case "x":
                         Console.WriteLine("Exiting...\n");
