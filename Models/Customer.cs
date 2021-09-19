@@ -9,10 +9,11 @@ namespace Models
     {
         public Customer(){}
 
-        public Customer(string name, string phonenumber, string password){
+        public Customer(string name, string phonenumber, string password, string password2){
             this.Name = name;
             this.Phonenumber = phonenumber;
             this.Password = password;
+            this.Password2 = password2;
         }
 
         //creating name validation
@@ -100,8 +101,33 @@ namespace Models
 
         } }
 
+        private string _password2;
+        public string Password2
+        { get
+        {
+            return _password2;
+        } 
+        set
+        {
+            if (value != _password)
+            {
+                InputInvalidException e = new InputInvalidException("Passwords are not matching");
+                Log.Warning(e.Message);
+                throw e;
+            }
+            else{
+                _password2 = value;
+            }
+
+        }}
+
         public override string ToString(){
             return $"Name: {this.Name}, Phone Number:{this.Phonenumber}\n";
+        }
+
+        public bool Equals(Customer customer)
+        {
+            return this.Phonenumber == customer.Phonenumber && this.Password == customer.Password;
         }
     }
 }

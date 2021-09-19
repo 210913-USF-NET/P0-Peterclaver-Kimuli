@@ -31,5 +31,21 @@ namespace DL
 
             return JsonSerializer.Deserialize<List<Customer>>(jsonString);
         }
+
+        public Customer LoginCustomer(string phonenumber, string password)
+        {
+            Customer loggedCustomer = new Customer();
+            List <Customer> allCustomers = GetCustomers();
+            
+            for(int i = 0; i<allCustomers.Count; i++)
+            {
+                if(allCustomers[i].Phonenumber == phonenumber && allCustomers[i].Password == password)
+                {
+                    loggedCustomer = allCustomers[i];
+                }
+            }
+
+            return loggedCustomer;
+        }
     }
 }

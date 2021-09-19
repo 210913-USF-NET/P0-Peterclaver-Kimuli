@@ -37,5 +37,9 @@ namespace DL
         public List<Customer> GetCustomers(){
             return  _customers;
         }
+
+        public Customer LoginCustomer(string phonenumber, string password){
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using Models;
 using BL;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Serilog;
 
 
@@ -22,33 +21,34 @@ namespace UI
         }
 
         public void Start() {
-            bool exit = false;
-            do
-            {
-                Console.WriteLine("\nType A to create an Account... Type x to return to the Main menu.");
-                
+            //bool exit = false;
+            
+            Console.WriteLine("\nType A to create an Account... Type x to return to the Main menu.");
+            
 
-                switch (Console.ReadLine())
-                {
-                    case "A":
-                        CreateCustomer();
-                        break;
-                    // case "1":
-                    //     ViewAllCustomers();
-                    //     break;
-                    case "x":
-                        exit = true;
-                        break;
-                    default:
-                        Console.WriteLine("Please type the correct input\n");
-                        break;
-                }
-            } while (!exit);
+            switch (Console.ReadLine())
+            {
+                case "A":
+                    CreateCustomer();
+                    break;
+                // case "1":
+                //     ViewAllCustomers();
+                //     break;
+                /* case "x":
+                    exit = true;
+                    break; */
+                default:
+                    Console.WriteLine("Please type the correct input\n");
+                    break;
+            }
+
         }
 
         //Creating customer account
+
         private void CreateCustomer()
         {
+            Log.Information("Creating Account");
             Console.WriteLine("\nPlease fill in the required information");
 
             Customer newCust = new Customer();
@@ -85,9 +85,23 @@ namespace UI
                 goto password;
             }
 
+            password2:
+            Console.WriteLine("Please confirm your Password: ");
+            string password2 = Console.ReadLine();
+            try{
+                newCust.Password2 = password2;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto password2;
+            }
+
             //Customer newCust = new Customer(name, email, password, phonenumber, zipcode);
             _bl.AddCustomer(newCust);
-            Console.WriteLine($"Congratulations! Your account is created: {newCust.ToString()}"); 
+            Console.WriteLine($"Congratulations! Your account is created: {newCust.Name}");
+            Log.Information("Account successfully created!"); 
+
+            new CustomerInterfaceMenu(newCust).Start();
         }
 
         private void ViewAllCustomers()

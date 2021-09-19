@@ -21,7 +21,7 @@ namespace UI
 
                 switch(input){
                     case "0":
-                        Console.WriteLine("Login");
+                        new LoginMenu(new CBL(new FileRepo())).Start();
                         break;
                     case "1":
                         new SignupMenu(new CBL(new FileRepo())).Start();

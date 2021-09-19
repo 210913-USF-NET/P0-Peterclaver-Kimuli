@@ -8,5 +8,6 @@ namespace BL
     {
         Customer AddCustomer(Customer cust);
         List<Customer> GetCustomers();
+        Customer LoginCustomer(string phonenumber, string password);
     }
 }

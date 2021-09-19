@@ -19,5 +19,11 @@ namespace BL
         public Customer AddCustomer(Customer cust){
             return _repo.AddCustomer(cust);
         }
+
+        public Customer LoginCustomer(string phonenumber, string password)
+        {
+            //add logic to update restaurant
+            return _repo.LoginCustomer(phonenumber, password);
+        }
     }
 }
