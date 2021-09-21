@@ -29,5 +29,15 @@ namespace UI
                     return null;
             }
         }
+
+        public static IMenu GetMenu (string menuToReturn, Manager manager)
+        {
+            switch(menuToReturn.ToLower()){
+                case "managerinterface":
+                    return new ManagerInterfaceMenu(manager);
+                default:
+                    return null;
+            }
+        }
     }
 }

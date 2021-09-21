@@ -1,15 +1,15 @@
-// This is the customer model
+// This is the manager model
 using System;
 using System.Text.RegularExpressions;
 using Serilog;
 
 namespace Models
 {
-    public class Customer
+    public class Manager
     {
-        public Customer(){}
+        public Manager(){}
 
-        public Customer(string name, string phonenumber, string password, string password2){
+        public Manager(string name, string phonenumber, string password, string password2){
             this.Name = name;
             this.Phonenumber = phonenumber;
             this.Password = password;
@@ -125,9 +125,9 @@ namespace Models
             return $"Name: {this.Name}, Phone Number:{this.Phonenumber}\n";
         }
 
-        public bool Equals(Customer customer)
+        public bool Equals(Manager manager)
         {
-            return this.Phonenumber == customer.Phonenumber && this.Password == customer.Password;
+            return this.Phonenumber == manager.Phonenumber && this.Password == manager.Password;
         }
     }
 }

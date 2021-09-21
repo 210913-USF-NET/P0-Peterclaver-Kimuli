@@ -20,10 +20,10 @@ namespace BL
             return _repo.AddCustomer(cust);
         }
 
-        public Customer LoginCustomer(string phonenumber, string password)
+        public List<Manager> GetManagers()
         {
-            //add logic to update restaurant
-            return _repo.LoginCustomer(phonenumber, password);
+            return _repo.GetManagers();
         }
+
     }
 }

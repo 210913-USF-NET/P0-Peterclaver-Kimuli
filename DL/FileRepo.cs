@@ -12,6 +12,8 @@ namespace DL
     {
         private const string filePath = "../DL/Customers.json";
 
+        private const string filePath1 = "../DL/Managers.json";
+
         private string jsonString;
 
         public Customer AddCustomer(Customer cust){
@@ -32,20 +34,11 @@ namespace DL
             return JsonSerializer.Deserialize<List<Customer>>(jsonString);
         }
 
-        public Customer LoginCustomer(string phonenumber, string password)
-        {
-            Customer loggedCustomer = new Customer();
-            List <Customer> allCustomers = GetCustomers();
-            
-            for(int i = 0; i<allCustomers.Count; i++)
-            {
-                if(allCustomers[i].Phonenumber == phonenumber && allCustomers[i].Password == password)
-                {
-                    loggedCustomer = allCustomers[i];
-                }
-            }
+        public List<Manager> GetManagers(){
+            jsonString = File.ReadAllText(filePath1);
 
-            return loggedCustomer;
+            return JsonSerializer.Deserialize<List<Manager>>(jsonString);
         }
+
     }
 }

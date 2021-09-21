@@ -31,6 +31,10 @@ namespace UI
 
             List<Customer> allCustomers =_bl.GetCustomers();
 
+            Manager loggedManager = new Manager();
+
+            List<Manager> allManagers =_bl.GetManagers();
+
             bool tracker = true;
             while(tracker){
                 for(int i = 0; i < allCustomers.Count; i++)
@@ -46,9 +50,31 @@ namespace UI
 
             if(loggedCustomer.Phonenumber != phonenumber || loggedCustomer.Password != password)
             {
-                Log.Information("\nFailed login attempt!");
-                Console.WriteLine("The information does not match our records! Please try again.");
-                goto login;
+                tracker = true;
+                while(tracker)
+                {
+                    for(int i = 0; i < allManagers.Count; i++)
+                    {
+                        if(allManagers[i].Phonenumber == phonenumber && allManagers[i].Password == password)
+                        {
+                            loggedManager = allManagers[i];
+                            tracker = false;
+                        }
+                        tracker = false;
+                    }
+                }
+                
+                if(loggedManager.Phonenumber != phonenumber || loggedManager.Password != password)
+                {
+                    Log.Information("\nFailed login attempt!");
+                    Console.WriteLine("The information does not match our records! Please try again.");
+                    goto login;
+                }
+                else{
+                    Log.Information("\nSuccessfully Logged in!");
+                    MenuFactory.GetMenu("managerinterface", loggedManager).Start();
+                }
+                
             }
             else{
                 Log.Information("\nSuccessfully Logged in!");

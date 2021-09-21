@@ -3,19 +3,19 @@ using Models;
 
 namespace UI
 {
-    public class CustomerInterfaceMenu : IMenu
+    public class ManagerInterfaceMenu : IMenu
     {
-        private Customer _cust;
-        public CustomerInterfaceMenu(){}
-        public CustomerInterfaceMenu(Customer cust){
-            this._cust = cust;
+        private Manager _manager;
+        public ManagerInterfaceMenu(){}
+        public ManagerInterfaceMenu(Manager manager){
+            this._manager = manager;
         }
         public void Start()
         {
-            Console.WriteLine($"\nWelcome {_cust.Name}. Please use the menu below to navigate through the App.");
+            Console.WriteLine($"\nWelcome {_manager.Name}. Please use the menu below to navigate through the App.");
 
-            Console.WriteLine("1. Type 1 to purchase items");
-            Console.WriteLine("2. Type 2 to check your previous orders");
+            Console.WriteLine("1. Type 1 to select a store location");
+            Console.WriteLine("2. Type 2 to create a new location");
 
             bool exit = false;
 
@@ -27,7 +27,7 @@ namespace UI
                 case "2":
                     Console.WriteLine("2");
                     break;
-               default:
+                default:
                     Console.WriteLine("Please type the correct input");
                     break;
             }

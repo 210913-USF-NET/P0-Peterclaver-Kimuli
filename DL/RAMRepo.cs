@@ -10,7 +10,7 @@ namespace DL
         private static RAMRepo _instance;
 
         private RAMRepo(){
-           /*  _customers = new List<Customer>(){
+        /*  _customers = new List<Customer>(){
                 new Customer(){
                     Name = "Peter",
                     Phonenumber = "7979696",
@@ -38,7 +38,8 @@ namespace DL
             return  _customers;
         }
 
-        public Customer LoginCustomer(string phonenumber, string password){
+        public List<Manager> GetManagers()
+        {
             throw new NotImplementedException();
         }
     }
