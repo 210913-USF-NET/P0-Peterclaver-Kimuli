@@ -66,7 +66,7 @@ namespace UI
                 
                 if(loggedManager.Phonenumber != phonenumber || loggedManager.Password != password)
                 {
-                    Log.Information("\nFailed login attempt!");
+                    Log.Information("Failed login attempt!");
                     Console.WriteLine("The information does not match our records! Please try again.");
                     goto login;
                 }

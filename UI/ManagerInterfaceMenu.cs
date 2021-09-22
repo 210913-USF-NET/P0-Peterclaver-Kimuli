@@ -25,12 +25,55 @@ namespace UI
                     Console.WriteLine("1");
                     break;
                 case "2":
-                    Console.WriteLine("2");
+                    CreateStore();
                     break;
                 default:
                     Console.WriteLine("Please type the correct input");
                     break;
             }
+        }
+
+        private void CreateStore(){
+            Console.WriteLine("\nCreate a new Store.");
+            
+            //Capturing store number
+            Store newStore = new Store();
+            number:
+            Console.WriteLine("Store number:");
+            string storeNumber = Console.ReadLine();
+            try{
+                newStore.Number = storeNumber;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto number;
+            }
+
+            //Capturing store location
+            location:
+            Console.WriteLine("Store Location:");
+            string storeLocation = Console.ReadLine();
+            try{
+                newStore.Location = storeLocation;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto location;
+            }
+
+            //Capturing store zipcode
+            zip:
+            Console.WriteLine("Store Zipcode:");
+            string storeZip = Console.ReadLine();
+            try{
+                newStore.Zipcode = storeZip;
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto zip;
+            }
+
+            Console.WriteLine($"You have successfully created {newStore.ToString()}");
         }
     }
 }
