@@ -1,6 +1,9 @@
 using DL;
 using BL;
-using Models;
+using Model = Models;
+using DL.Entities;
+using System.IO;
+using Microsoft.EntityFrameworkCore;
 
 namespace UI
 {
@@ -8,19 +11,25 @@ namespace UI
     {
         public static IMenu GetMenu (string menuToReturn)
         {
+            string connectionString = File.ReadAllText(@"../Connection.txt");
+            DbContextOptions<ShoppingAppDBContext> options = new DbContextOptionsBuilder<ShoppingAppDBContext>()
+            .UseSqlServer(connectionString).Options;
+
+            ShoppingAppDBContext context = new ShoppingAppDBContext(options);
+            
             switch(menuToReturn.ToLower()){
                 case "main":
                     return new MainMenu();
                 case "login":
                     return new LoginMenu(new CBL(new FileRepo()));
                 case "signup":
-                    return new SignupMenu(new CBL(new FileRepo()));
+                    return new SignupMenu(new CBL(new DBRepo(context)));
                 default:
                     return null;
             }
         }
 
-        public static IMenu GetMenu (string menuToReturn, Customer customer)
+        public static IMenu GetMenu (string menuToReturn, Model.Customer customer)
         {
             switch(menuToReturn.ToLower()){
                 case "customerinterface":
@@ -30,7 +39,7 @@ namespace UI
             }
         }
 
-        public static IMenu GetMenu (string menuToReturn, Manager manager)
+        public static IMenu GetMenu (string menuToReturn, Model.Manager manager)
         {
             switch(menuToReturn.ToLower()){
                 case "managerinterface":
