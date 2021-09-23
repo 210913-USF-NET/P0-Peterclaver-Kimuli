@@ -13,3 +13,6 @@ C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\obj\Debug\
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\obj\Debug\net5.0\DL.dll
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\obj\Debug\net5.0\ref\DL.dll
 C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\obj\Debug\net5.0\DL.pdb
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\bin\Debug\net5.0\DL.runtimeconfig.json
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\bin\Debug\net5.0\DL.runtimeconfig.dev.json
+C:\Users\owner\RevatureProjects\Project-Zero\P0-Peterclaver-Kimuli\DL\obj\Debug\net5.0\DL.genruntimeconfig.cache

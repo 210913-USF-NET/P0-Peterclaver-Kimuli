@@ -81,5 +81,38 @@ namespace Tests
             //Act and Assert
             Assert.Throws<InputInvalidException>(() => test.Name = input);
         }
+
+        [Theory]
+        [InlineData("")]
+        public void StoreNumberShouldNotBeBlank(string input){
+            //Arrange
+            Store test = new Store();
+
+            //Act and Assert
+            Assert.Throws<InputInvalidException>(() => test.Number = input);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("+=#^")]
+        public void StoreLocationShouldNotAllowInvalidInput(string input){
+            //Arrange
+            Store test = new Store();
+
+            //Act and Assert
+            Assert.Throws<InputInvalidException>(() => test.Location = input);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("+=#^")]
+        [InlineData("234")]
+        public void StoreZipcodeShouldNotAllowInvalidInput(string input){
+            //Arrange
+            Store test = new Store();
+
+            //Act and Assert
+            Assert.Throws<InputInvalidException>(() => test.Zipcode = input);
+        }
     }
 }
