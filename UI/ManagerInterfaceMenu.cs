@@ -1,6 +1,8 @@
 using System;
 using Models;
 using BL;
+using System.Collections.Generic;
+using Serilog;
 
 namespace UI
 {
@@ -18,25 +20,28 @@ namespace UI
         {
             Console.WriteLine($"\nWelcome {_manager.Name}. Please use the menu below to navigate through the App.");
 
-            Console.WriteLine("1. Type 1 to select a store location");
-            Console.WriteLine("2. Type 2 to create a new location... or type X to exit");
-
-            //bool exit = false;
-
-            switch(Console.ReadLine())
+            bool exit = false;
+            do
             {
-                case "1":
-                    Console.WriteLine("1");
-                    break;
-                case "2":
-                    CreateStore();
-                    break;
-                case "X":
-                    break;
-                default:
-                    Console.WriteLine("Please type the correct input");
-                    break;
-            }
+                Console.WriteLine("\n1. Type 1 to select a store location");
+                Console.WriteLine("2. Type 2 to create a new location... or type X to exit");
+
+                switch(Console.ReadLine())
+                {
+                    case "1":
+                        SelectStore();
+                        break;
+                    case "2":
+                        CreateStore();
+                        break;
+                    case "X":
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Please type the correct input");
+                        break;
+                }
+            }while(!exit);
         }
 
         private void CreateStore(){
@@ -82,7 +87,27 @@ namespace UI
 
             Store addedStore = _bl.AddStore(newStore);
 
-            Console.WriteLine($"You have successfully created\n{addedStore.ToString()}");
+            Log.Information("Store created successfully");
+            Console.WriteLine($"You have successfully created a store:\n{addedStore.ToString()}");
+        }
+
+        private void SelectStore()
+        {
+            List<Store> storesToSelect = _bl.GetStores();
+            Console.WriteLine("\nPlease select from the stores below:");
+            if(storesToSelect.Count == 0 || storesToSelect == null)
+            {
+                Console.WriteLine("There are no stores currently\n");
+                return;
+            }
+            for(int i=0; i<storesToSelect.Count; i++)
+            {
+                Console.WriteLine($"[{i + 1}] {storesToSelect[i].Number}.{storesToSelect[i].Location} {storesToSelect[i].Zipcode}");
+            }
+
+            string input = Console.ReadLine();
+            int parsedInput;
+            bool parseSuccess;
         }
     }
 }

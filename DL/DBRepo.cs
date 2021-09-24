@@ -94,5 +94,16 @@ namespace DL
                 }
             ).ToList();
         }
+
+        public List<Store> GetStores()
+        {
+            return _context.Stores.Select(
+                s => new Model.Store(){
+                    Number = s.Number,
+                    Location = s.Location,
+                    Zipcode = s.Zipcode
+                }
+            ).ToList();
+        }
     }
 }

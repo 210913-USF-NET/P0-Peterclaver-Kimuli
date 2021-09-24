@@ -107,7 +107,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"Store number:{this.Number}\n Location:{this.Location}";
+            return $"Store number:{this.Number}\nLocation:{this.Location}";
         }
     }
 }

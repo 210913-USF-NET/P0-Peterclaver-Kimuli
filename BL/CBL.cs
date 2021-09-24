@@ -30,5 +30,10 @@ namespace BL
         {
             return _repo.AddStore(store);
         }
+
+        public List<Store> GetStores()
+        {
+            return _repo.GetStores();
+        }
     }
 }

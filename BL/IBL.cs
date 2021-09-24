@@ -10,5 +10,6 @@ namespace BL
         List<Customer> GetLoggedInCustomer(string phonenumber, string password);
         List<Manager> GetManagers(string phonenumber, string password);
         Store AddStore(Store store);
+        List<Store> GetStores();
     }
 }
