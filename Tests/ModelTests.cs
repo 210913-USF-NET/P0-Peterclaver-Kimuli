@@ -41,7 +41,6 @@ namespace Tests
             testPassword.Password = "12345";
             testPassword.Password2 = "12345";
 
-
             //Assert
             Assert.Equal(testPassword.Password, testPassword.Password2);
         }

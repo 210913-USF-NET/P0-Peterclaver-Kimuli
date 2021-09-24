@@ -95,9 +95,10 @@ namespace DL
             ).ToList();
         }
 
-        public List<Store> GetStores()
+        public List<Model.Store> GetStores(string managerNumber)
         {
-            return _context.Stores.Select(
+            return _context.Stores.Where(managerPhone => managerPhone.Managerphone.Contains(managerNumber))
+            .Select(
                 s => new Model.Store(){
                     Number = s.Number,
                     Location = s.Location,

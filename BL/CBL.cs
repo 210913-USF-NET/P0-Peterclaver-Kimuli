@@ -31,9 +31,9 @@ namespace BL
             return _repo.AddStore(store);
         }
 
-        public List<Store> GetStores()
+        public List<Store> GetStores(string managerNumber)
         {
-            return _repo.GetStores();
+            return _repo.GetStores(managerNumber);
         }
     }
 }

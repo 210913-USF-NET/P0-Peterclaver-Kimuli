@@ -24,7 +24,7 @@ namespace UI
             do
             {
                 Console.WriteLine("\n1. Type 1 to select a store location");
-                Console.WriteLine("2. Type 2 to create a new location... or type X to exit");
+                Console.WriteLine("2. Type 2 to create a new location... or type x to exit");
 
                 switch(Console.ReadLine())
                 {
@@ -34,7 +34,7 @@ namespace UI
                     case "2":
                         CreateStore();
                         break;
-                    case "X":
+                    case "x":
                         exit = true;
                         break;
                     default:
@@ -93,7 +93,8 @@ namespace UI
 
         private void SelectStore()
         {
-            List<Store> storesToSelect = _bl.GetStores();
+            menu:
+            List<Store> storesToSelect = _bl.GetStores(_manager.Phonenumber);
             Console.WriteLine("\nPlease select from the stores below:");
             if(storesToSelect.Count == 0 || storesToSelect == null)
             {
@@ -102,12 +103,23 @@ namespace UI
             }
             for(int i=0; i<storesToSelect.Count; i++)
             {
-                Console.WriteLine($"[{i + 1}] {storesToSelect[i].Number}.{storesToSelect[i].Location} {storesToSelect[i].Zipcode}");
+                Console.WriteLine($"[{i + 1}] {storesToSelect[i].Number}, {storesToSelect[i].Location} {storesToSelect[i].Zipcode}");
             }
 
             string input = Console.ReadLine();
             int parsedInput;
-            bool parseSuccess;
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+            if (parseSuccess && parsedInput >= 0 && parsedInput <= storesToSelect.Count)
+            {
+                int actualInput = parsedInput - 1;
+                Log.Information("Logging into the store manager menu");
+                MenuFactory.GetMenu("storemanagermenu", storesToSelect[actualInput]).Start();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+                goto menu;
+            }
         }
     }
 }

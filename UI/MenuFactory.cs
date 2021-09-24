@@ -54,5 +54,21 @@ namespace UI
                     return null;
             }
         }
+
+        public static IMenu GetMenu (string menuToReturn, Model.Store store)
+        {
+            string connectionString = File.ReadAllText(@"../Connection.txt");
+            DbContextOptions<ShoppingAppDBContext> options = new DbContextOptionsBuilder
+            <ShoppingAppDBContext>().UseSqlServer(connectionString).Options;
+
+            ShoppingAppDBContext context = new ShoppingAppDBContext(options);
+
+            switch(menuToReturn.ToLower()){
+                case "storemanagermenu":
+                    return new StoreManagerInterface(new CBL(new DBRepo(context)), store);
+                default:
+                    return null;
+            }
+        }
     }
 }
