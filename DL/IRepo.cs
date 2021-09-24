@@ -6,7 +6,8 @@ namespace DL
     public interface IRepo
     {
         Customer AddCustomer(Customer cust);
-        List<Customer> GetCustomers();
-        List<Manager> GetManagers();
+        List<Customer> GetLoggedInCustomer(string phonenumber, string password);
+        List<Manager> GetManagers(string phonenumber, string password);
+        Store AddStore(Store store);
     }
 }

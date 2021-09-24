@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Model = Models;
 using Entity = DL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Models;
 
 namespace DL
 {
@@ -42,14 +43,56 @@ namespace DL
                 Password2 = custToAdd.Password1
             };
         }
-        
-        public List<Model.Customer> GetCustomers(){
-            throw new NotImplementedException();
+
+        public Store AddStore(Store store)
+        {
+            Entity.Store storeToAdd = new Entity.Store()
+            {
+                Number = store.Number,
+                Location = store.Location,
+                Zipcode = store.Zipcode,
+                Managerphone = store.ManagerPhone
+            };
+
+            storeToAdd = _context.Add(storeToAdd).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Model.Store()
+            {
+                Number = storeToAdd.Number,
+                Location = storeToAdd.Location,
+                Zipcode = storeToAdd.Zipcode,
+                ManagerPhone = storeToAdd.Managerphone
+            };
         }
 
-        public List<Model.Manager> GetManagers()
+        public List<Model.Customer> GetLoggedInCustomer(string phonenumber, string password){
+            List<Model.Customer> loggedInCust = new List<Model.Customer>();
+
+            loggedInCust = _context.Customers.Where(
+                cust => cust.Phonenumber.Contains(phonenumber) && cust.Password.Contains(password)
+            ).Select(
+                c => new Model.Customer(){
+                    Phonenumber = c.Phonenumber,
+                    Name = c.Name,
+                    Password = c.Password
+                }
+            ).ToList();
+
+            return loggedInCust;
+        }
+
+        public List<Model.Manager> GetManagers(string phonenumber, string password)
         {
-            throw new NotImplementedException();
+            return _context.Managers.Where(manager => manager.Phonenumber.Contains(phonenumber) 
+            && manager.Password.Contains(password)).Select(
+                m => new Model.Manager(){
+                    Phonenumber = m.Phonenumber,
+                    Name = m.Name,
+                    Password = m.Password
+                }
+            ).ToList();
         }
     }
 }

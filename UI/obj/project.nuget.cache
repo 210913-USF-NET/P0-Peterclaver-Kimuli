@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "F6xV7FnHpjq34QB+eJCddz35CMhiQ0wiE/od+dr53m5DWr3gIiB/Gomy9CrzIgCUUrZW43Edz8HJJ4wPTyrV3g==",
+  "dgSpecHash": "N1ACBhDcwcrrAkuFn25mBekgmsEi3PISWYpELRHobSw6F0q5SNHvjs6XHpP1JpkQ4GtT01wxcPpwL8uoxc1Pdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\owner\\RevatureProjects\\Project-Zero\\P0-Peterclaver-Kimuli\\UI\\UI.csproj",
+  "projectFilePath": "C:\\Users\\owner\\RevatureProjects\\P0\\P0-Peterclaver-Kimuli\\UI\\UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\owner\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\owner\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

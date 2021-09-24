@@ -14,71 +14,45 @@ namespace UI
         public LoginMenu(IBL bl){
             _bl = bl;
         }
+
+        string phonenumber;
         
         public void Start()
         {
-            Log.Information("\nLogging in...");
-            Console.WriteLine("Login Please!");
-
             login:
+            Log.Information("Logging in...");
+            Console.WriteLine("\nLogin Please...");
+
             Console.WriteLine("Phonenumber: "); 
-            string phonenumber = Console.ReadLine();
+            phonenumber = Console.ReadLine();
 
             Console.WriteLine("Password: "); 
             string password = Console.ReadLine();
 
-            Customer loggedCustomer = new Customer();
+            List<Customer> allCustomers =_bl.GetLoggedInCustomer(phonenumber, password);
 
-            List<Customer> allCustomers =_bl.GetCustomers();
+            List<Manager> allManagers =_bl.GetManagers(phonenumber, password); 
 
-            Manager loggedManager = new Manager();
-
-            List<Manager> allManagers =_bl.GetManagers();
-
-            bool tracker = true;
-            while(tracker){
-                for(int i = 0; i < allCustomers.Count; i++)
-                {
-                    if(allCustomers[i].Phonenumber == phonenumber && allCustomers[i].Password == password)
-                    {
-                        loggedCustomer = allCustomers[i];
-                        tracker = false;
-                    }
-                    tracker = false;
-                }
-            }            
-
-            if(loggedCustomer.Phonenumber != phonenumber || loggedCustomer.Password != password)
+            //check if user is in the customers' DB
+            if(allCustomers.Count > 0 && allCustomers != null)
             {
-                tracker = true;
-                while(tracker)
-                {
-                    for(int i = 0; i < allManagers.Count; i++)
-                    {
-                        if(allManagers[i].Phonenumber == phonenumber && allManagers[i].Password == password)
-                        {
-                            loggedManager = allManagers[i];
-                            tracker = false;
-                        }
-                        tracker = false;
-                    }
-                }
-                
-                if(loggedManager.Phonenumber != phonenumber || loggedManager.Password != password)
-                {
-                    Log.Information("Failed login attempt!");
-                    Console.WriteLine("The information does not match our records! Please try again.");
-                    goto login;
-                }
-                else{
-                    Log.Information("\nSuccessfully Logged in!");
-                    MenuFactory.GetMenu("managerinterface", loggedManager).Start();
-                }
-                
-            }
-            else{
                 Log.Information("\nSuccessfully Logged in!");
-                MenuFactory.GetMenu("customerinterface", loggedCustomer).Start();
+                MenuFactory.GetMenu("customerinterface", allCustomers[0]).Start();
+            }
+
+            //if not in customers' DB then check if user is in the managers' DB
+            else if(allManagers.Count > 0 && allManagers != null)
+            {
+                Log.Information("\nSuccessfully Logged in!");
+                MenuFactory.GetMenu("managerinterface", allManagers[0]).Start();
+            }
+
+            //Failed login attempt
+            else
+            {
+                Log.Information("Failed login attempt!");
+                Console.WriteLine("The information does not match our records! Please try again.");
+                goto login;
             }
         }
     }

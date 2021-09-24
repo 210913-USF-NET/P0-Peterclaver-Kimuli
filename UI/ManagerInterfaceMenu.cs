@@ -1,23 +1,27 @@
 using System;
 using Models;
+using BL;
 
 namespace UI
 {
     public class ManagerInterfaceMenu : IMenu
     {
         private Manager _manager;
+
+        private IBL _bl;
         public ManagerInterfaceMenu(){}
-        public ManagerInterfaceMenu(Manager manager){
+        public ManagerInterfaceMenu(IBL bl, Manager manager){
             this._manager = manager;
+            _bl = bl;
         }
         public void Start()
         {
             Console.WriteLine($"\nWelcome {_manager.Name}. Please use the menu below to navigate through the App.");
 
             Console.WriteLine("1. Type 1 to select a store location");
-            Console.WriteLine("2. Type 2 to create a new location");
+            Console.WriteLine("2. Type 2 to create a new location... or type X to exit");
 
-            bool exit = false;
+            //bool exit = false;
 
             switch(Console.ReadLine())
             {
@@ -27,6 +31,8 @@ namespace UI
                 case "2":
                     CreateStore();
                     break;
+                case "X":
+                    break;
                 default:
                     Console.WriteLine("Please type the correct input");
                     break;
@@ -34,10 +40,11 @@ namespace UI
         }
 
         private void CreateStore(){
-            Console.WriteLine("\nCreate a new Store.");
+            Console.WriteLine("\n[Create a new Store.]");
             
             //Capturing store number
             Store newStore = new Store();
+            newStore.ManagerPhone = _manager.Phonenumber;
             number:
             Console.WriteLine("Store number:");
             string storeNumber = Console.ReadLine();
@@ -73,7 +80,9 @@ namespace UI
                 goto zip;
             }
 
-            Console.WriteLine($"You have successfully created {newStore.ToString()}");
+            Store addedStore = _bl.AddStore(newStore);
+
+            Console.WriteLine($"You have successfully created\n{addedStore.ToString()}");
         }
     }
 }

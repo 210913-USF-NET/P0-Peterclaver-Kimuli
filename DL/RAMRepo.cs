@@ -1,4 +1,4 @@
-using System;
+/* using System;
 using System.Linq;
 using System.Collections.Generic;
 using Models;
@@ -9,14 +9,15 @@ namespace DL
     {
         private static RAMRepo _instance;
 
-        private RAMRepo(){
-        /*  _customers = new List<Customer>(){
+        private RAMRepo()
+        {
+            _customers = new List<Customer>(){
                 new Customer(){
                     Name = "Peter",
                     Phonenumber = "7979696",
                     Password = "password"
                 }
-            }; */
+            };
         }
 
         public static RAMRepo GetInstance(){
@@ -43,4 +44,4 @@ namespace DL
             throw new NotImplementedException();
         }
     }
-}
+} */

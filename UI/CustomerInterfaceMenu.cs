@@ -17,7 +17,7 @@ namespace UI
             Console.WriteLine("1. Type 1 to purchase items");
             Console.WriteLine("2. Type 2 to check your previous orders");
 
-            bool exit = false;
+            //bool exit = false;
 
             switch(Console.ReadLine())
             {

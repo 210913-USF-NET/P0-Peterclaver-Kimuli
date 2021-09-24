@@ -15,6 +15,8 @@ namespace Models
             this.Zipcode = zipcode;
         }
 
+        public string ManagerPhone{get; set;}
+
         //Validating the store number
         private string _number;
         public string Number 
@@ -105,7 +107,7 @@ namespace Models
 
         public override string ToString()
         {
-            return $"Store number:{this.Number}, Location:{this.Location}";
+            return $"Store number:{this.Number}\n Location:{this.Location}";
         }
     }
 }

@@ -104,14 +104,14 @@ namespace UI
             MenuFactory.GetMenu("customerinterface", newCust).Start();
         }
 
-        private void ViewAllCustomers()
-        {
-            List<Customer> allCust = _bl.GetCustomers();
+        // private void ViewAllCustomers()
+        // {
+        //     List<Customer> allCust = _bl.GetCustomers();
 
-            foreach (Customer cust in allCust)
-            {
-                Console.WriteLine(cust.ToString());
-            }
-        }
+        //     foreach (Customer cust in allCust)
+        //     {
+        //         Console.WriteLine(cust.ToString());
+        //     }
+        // }
     }
 }
