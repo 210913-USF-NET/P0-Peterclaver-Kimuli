@@ -64,15 +64,17 @@ namespace DL.Entities
             {
                 entity.ToTable("CUSTOMERORDER");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Customerphone)
                     .IsRequired()
                     .HasMaxLength(10)
                     .IsUnicode(false)
                     .HasColumnName("CUSTOMERPHONE");
+
+                entity.Property(e => e.Orderdate)
+                    .HasColumnType("date")
+                    .HasColumnName("ORDERDATE");
 
                 entity.Property(e => e.Storeid)
                     .IsRequired()
@@ -88,13 +90,13 @@ namespace DL.Entities
                     .WithMany(p => p.Customerorders)
                     .HasForeignKey(d => d.Customerphone)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CUSTOMERO__CUSTO__6A30C649");
+                    .HasConstraintName("FK__CUSTOMERO__CUSTO__282DF8C2");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Customerorders)
                     .HasForeignKey(d => d.Storeid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CUSTOMERO__STORE__6B24EA82");
+                    .HasConstraintName("FK__CUSTOMERO__STORE__29221CFB");
             });
 
             modelBuilder.Entity<Lineitem>(entity =>
@@ -111,21 +113,17 @@ namespace DL.Entities
 
                 entity.Property(e => e.Quantity).HasColumnName("QUANTITY");
 
-                entity.Property(e => e.Unitprice)
-                    .HasColumnType("decimal(10, 2)")
-                    .HasColumnName("UNITPRICE");
-
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Orderid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__ORDERI__00200768");
+                    .HasConstraintName("FK__LINEITEM__ORDERI__2BFE89A6");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Productid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__PRODUC__01142BA1");
+                    .HasConstraintName("FK__LINEITEM__PRODUC__2CF2ADDF");
             });
 
             modelBuilder.Entity<Manager>(entity =>
@@ -173,21 +171,9 @@ namespace DL.Entities
 
                 entity.Property(e => e.Stock).HasColumnName("STOCK");
 
-                entity.Property(e => e.Storeid)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("STOREID");
-
                 entity.Property(e => e.Unitprice)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("UNITPRICE");
-
-                entity.HasOne(d => d.Store)
-                    .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.Storeid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PRODUCTS__STOREI__797309D9");
             });
 
             modelBuilder.Entity<Store>(entity =>
@@ -245,13 +231,13 @@ namespace DL.Entities
                     .WithMany(p => p.Storeproducts)
                     .HasForeignKey(d => d.Productid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__STOREPROD__PRODU__04E4BC85");
+                    .HasConstraintName("FK__STOREPROD__PRODU__0A9D95DB");
 
                 entity.HasOne(d => d.Store)
                     .WithMany(p => p.Storeproducts)
                     .HasForeignKey(d => d.Storeid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__STOREPROD__STORE__03F0984C");
+                    .HasConstraintName("FK__STOREPROD__STORE__09A971A2");
             });
 
             OnModelCreatingPartial(modelBuilder);

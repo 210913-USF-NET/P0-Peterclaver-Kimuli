@@ -44,6 +44,28 @@ namespace DL
             };
         }
 
+        public Product AddProduct(Product product)
+        {
+            Entity.Product newProduct = new Entity.Product()
+            {
+                Name = product.Name,
+                Stock = product.Quantity,
+                Unitprice = product.UnitPrice
+            };
+
+            newProduct = _context.Add(newProduct).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Model.Product()
+            {
+                Id = newProduct.Id,
+                Name = newProduct.Name,
+                Quantity = newProduct.Stock,
+                UnitPrice = newProduct.Unitprice
+            };
+        }
+
         public Store AddStore(Store store)
         {
             Entity.Store storeToAdd = new Entity.Store()

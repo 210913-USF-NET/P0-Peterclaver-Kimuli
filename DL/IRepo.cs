@@ -10,5 +10,6 @@ namespace DL
         List<Manager> GetManagers(string phonenumber, string password);
         Store AddStore(Store store);
         List<Store> GetStores(string managerNumber);
+        Product AddProduct(Product product);
     }
 }

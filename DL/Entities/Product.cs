@@ -17,9 +17,7 @@ namespace DL.Entities
         public string Name { get; set; }
         public int Stock { get; set; }
         public decimal Unitprice { get; set; }
-        public string Storeid { get; set; }
 
-        public virtual Store Store { get; set; }
         public virtual ICollection<Lineitem> Lineitems { get; set; }
         public virtual ICollection<Storeproduct> Storeproducts { get; set; }
     }

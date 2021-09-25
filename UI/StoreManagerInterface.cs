@@ -3,6 +3,7 @@ using Models;
 using BL;
 using System.Collections.Generic;
 using Serilog;
+using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -37,7 +38,7 @@ namespace UI
                         Console.WriteLine("0");
                         break;
                     case "1":
-                        Console.WriteLine("1");
+                        AddProduct();
                         break;
                     case "2":
                         Console.WriteLine("2");
@@ -53,6 +54,72 @@ namespace UI
                         break;
                 }
             }while(!exit);
+        }
+
+        private void AddProduct()
+        {
+            Console.WriteLine("\nCreate a product...");
+
+            Product newProduct = new Product();
+            name:
+            Console.WriteLine("Product name: ");
+            try{
+                newProduct.Name = Console.ReadLine();
+            }
+            catch(InputInvalidException e){
+                Console.WriteLine(e.Message);
+                goto name;
+            }
+            
+            quantity:
+            Console.WriteLine("On-hand quantity: ");
+            string quantity = Console.ReadLine();
+            int parsedInt;
+            bool parseSuccess = Int32.TryParse(quantity, out parsedInt);
+            if(parseSuccess)
+            {
+                try
+                {
+                    newProduct.Quantity = parsedInt;
+                }
+                catch(InputInvalidException e)
+                {
+                    Console.WriteLine(e.Message);
+                    goto quantity;
+                }
+            }
+            else{
+                System.Console.WriteLine("Please put the correct quantity.");
+                goto quantity;
+            }
+
+            unitprice:
+            Console.WriteLine("Unit price: ");
+            string unitPrice = Console.ReadLine();
+            decimal parsedDecimal;
+            try 
+            {
+                parsedDecimal = System.Convert.ToDecimal(unitPrice);
+                Console.WriteLine($"Unit is : {parsedDecimal}");
+            }
+            catch (System.OverflowException)
+            {
+                System.Console.WriteLine(
+                    "Please put a correct price.");
+                goto unitprice;
+            }
+            catch (System.FormatException)
+            {
+                System.Console.WriteLine(
+                    "The unit price should be a decimal number.");
+                goto unitprice;
+            }
+            catch (System.ArgumentNullException) 
+            {
+                System.Console.WriteLine(
+                    "Please fill in the unit price.");
+                goto unitprice;
+            }
         }
     }
 }

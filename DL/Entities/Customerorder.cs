@@ -16,6 +16,7 @@ namespace DL.Entities
         public decimal Total { get; set; }
         public string Customerphone { get; set; }
         public string Storeid { get; set; }
+        public DateTime Orderdate { get; set; }
 
         public virtual Customer CustomerphoneNavigation { get; set; }
         public virtual Store Store { get; set; }
