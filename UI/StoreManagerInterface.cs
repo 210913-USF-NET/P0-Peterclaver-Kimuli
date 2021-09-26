@@ -35,7 +35,7 @@ namespace UI
                 switch(Console.ReadLine())
                 {
                     case "0":
-                        Console.WriteLine("0");
+                        ProductsReturned();
                         break;
                     case "1":
                         AddProduct();
@@ -100,7 +100,6 @@ namespace UI
             try 
             {
                 parsedDecimal = System.Convert.ToDecimal(unitPrice);
-                Console.WriteLine($"Unit is : {parsedDecimal}");
             }
             catch (System.OverflowException)
             {
@@ -120,6 +119,53 @@ namespace UI
                     "Please fill in the unit price.");
                 goto unitprice;
             }
+
+            try 
+            {
+                newProduct.UnitPrice = parsedDecimal;
+            }
+            catch (InputInvalidException e)
+            {
+                Console.WriteLine(e.Message);
+                goto unitprice;
+            }
+
+            newProduct.StoreID = _store.Number;
+
+            Product addedProduct = _bl.AddProduct(newProduct);
+            Log.Information("Product Successfully added");
+            Console.WriteLine($"You have successfully added {addedProduct.Quantity} {addedProduct.Name} of unit price ${addedProduct.UnitPrice}");
+        }
+
+       private void ProductsReturned()
+        {
+            //menu:
+            List<Product> products = _bl.GetProducts(_store.Number);
+            Console.WriteLine("\nStore Items:");
+            if(products.Count == 0 || products == null)
+            {
+                Console.WriteLine("There are currently no items in this store\n");
+                return;
+            }
+            for(int i=0; i<products.Count; i++)
+            {
+                Console.WriteLine($"[{i + 1}] {products[i].Name}, In stock: {products[i].Quantity}, Unit Price: {products[i].UnitPrice}");
+            }
+
+            /* string input = Console.ReadLine();
+            int parsedInput;
+            bool parseSuccess = Int32.TryParse(input, out parsedInput);
+            if (parseSuccess && parsedInput >= 0 && parsedInput <= storesToSelect.Count)
+            {
+                int actualInput = parsedInput - 1;
+                Log.Information("Logging into the store manager menu");
+                MenuFactory.GetMenu("storemanagermenu", storesToSelect[actualInput]).Start();
+            }
+            else
+            {
+                Console.WriteLine("Invalid input.");
+                goto menu;
+            } */
         }
     }
 }

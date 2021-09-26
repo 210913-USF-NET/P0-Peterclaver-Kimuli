@@ -35,5 +35,20 @@ namespace BL
         {
             return _repo.GetStores(managerNumber);
         }
+
+        public Product AddProduct(Product product)
+        {
+            return _repo.AddProduct(product);
+        }
+
+        public void AddToStoreProduct(string storeNumber, int productID)
+        {
+            _repo.AddToStoreProduct(storeNumber, productID);
+        }
+
+        public List<Product> GetProducts(string storeNumber)
+        {
+            return _repo.GetProducts(storeNumber);
+        }
     }
 }

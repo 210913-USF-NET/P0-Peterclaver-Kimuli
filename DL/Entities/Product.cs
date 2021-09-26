@@ -10,15 +10,14 @@ namespace DL.Entities
         public Product()
         {
             Lineitems = new HashSet<Lineitem>();
-            Storeproducts = new HashSet<Storeproduct>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public int Stock { get; set; }
         public decimal Unitprice { get; set; }
+        public string Storeid { get; set; }
 
         public virtual ICollection<Lineitem> Lineitems { get; set; }
-        public virtual ICollection<Storeproduct> Storeproducts { get; set; }
     }
 }

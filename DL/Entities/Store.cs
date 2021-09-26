@@ -10,7 +10,6 @@ namespace DL.Entities
         public Store()
         {
             Customerorders = new HashSet<Customerorder>();
-            Storeproducts = new HashSet<Storeproduct>();
         }
 
         public string Number { get; set; }
@@ -20,6 +19,5 @@ namespace DL.Entities
 
         public virtual Manager ManagerphoneNavigation { get; set; }
         public virtual ICollection<Customerorder> Customerorders { get; set; }
-        public virtual ICollection<Storeproduct> Storeproducts { get; set; }
     }
 }

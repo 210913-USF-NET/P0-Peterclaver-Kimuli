@@ -11,5 +11,7 @@ namespace DL
         Store AddStore(Store store);
         List<Store> GetStores(string managerNumber);
         Product AddProduct(Product product);
+        void AddToStoreProduct(string storeNumber, int productID);
+        List<Product> GetProducts(string storeNumber);
     }
 }

@@ -23,7 +23,6 @@ namespace DL.Entities
         public virtual DbSet<Manager> Managers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Store> Stores { get; set; }
-        public virtual DbSet<Storeproduct> Storeproducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -117,13 +116,13 @@ namespace DL.Entities
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Orderid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__ORDERI__2BFE89A6");
+                    .HasConstraintName("FK__LINEITEM__ORDERI__32AB8735");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Productid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__PRODUC__2CF2ADDF");
+                    .HasConstraintName("FK__LINEITEM__PRODUC__339FAB6E");
             });
 
             modelBuilder.Entity<Manager>(entity =>
@@ -171,6 +170,12 @@ namespace DL.Entities
 
                 entity.Property(e => e.Stock).HasColumnName("STOCK");
 
+                entity.Property(e => e.Storeid)
+                    .IsRequired()
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("STOREID");
+
                 entity.Property(e => e.Unitprice)
                     .HasColumnType("decimal(10, 2)")
                     .HasColumnName("UNITPRICE");
@@ -211,33 +216,6 @@ namespace DL.Entities
                     .HasForeignKey(d => d.Managerphone)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__STORE__MANAGERPH__6754599E");
-            });
-
-            modelBuilder.Entity<Storeproduct>(entity =>
-            {
-                entity.ToTable("STOREPRODUCTS");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Productid).HasColumnName("PRODUCTID");
-
-                entity.Property(e => e.Storeid)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("STOREID");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Storeproducts)
-                    .HasForeignKey(d => d.Productid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__STOREPROD__PRODU__0A9D95DB");
-
-                entity.HasOne(d => d.Store)
-                    .WithMany(p => p.Storeproducts)
-                    .HasForeignKey(d => d.Storeid)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__STOREPROD__STORE__09A971A2");
             });
 
             OnModelCreatingPartial(modelBuilder);

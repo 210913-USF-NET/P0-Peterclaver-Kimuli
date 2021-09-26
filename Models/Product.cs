@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using Serilog;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -15,6 +16,8 @@ namespace Models
         }
 
         public int Id { get; set; }
+
+        public string StoreID{get; set;}
 
         //creating name validation
         private string _name;

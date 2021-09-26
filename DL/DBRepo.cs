@@ -44,13 +44,15 @@ namespace DL
             };
         }
 
+        //Add a product to the DB
         public Product AddProduct(Product product)
         {
             Entity.Product newProduct = new Entity.Product()
             {
                 Name = product.Name,
                 Stock = product.Quantity,
-                Unitprice = product.UnitPrice
+                Unitprice = product.UnitPrice,
+                Storeid = product.StoreID
             };
 
             newProduct = _context.Add(newProduct).Entity;
@@ -89,11 +91,24 @@ namespace DL
             };
         }
 
+        public void AddToStoreProduct(string storeNumber, int productID)
+        {
+            Entity.Storeproduct storeProduct = new Entity.Storeproduct()
+            {
+                Storeid = storeNumber,
+                Productid = productID
+            };
+
+            storeProduct = _context.Add(storeProduct).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+        }
+
         public List<Model.Customer> GetLoggedInCustomer(string phonenumber, string password){
             List<Model.Customer> loggedInCust = new List<Model.Customer>();
 
             loggedInCust = _context.Customers.Where(
-                cust => cust.Phonenumber.Contains(phonenumber) && cust.Password.Contains(password)
+                cust => cust.Phonenumber == phonenumber && cust.Password == password
             ).Select(
                 c => new Model.Customer(){
                     Phonenumber = c.Phonenumber,
@@ -107,14 +122,30 @@ namespace DL
 
         public List<Model.Manager> GetManagers(string phonenumber, string password)
         {
-            return _context.Managers.Where(manager => manager.Phonenumber.Contains(phonenumber) 
-            && manager.Password.Contains(password)).Select(
+            return _context.Managers.Where(manager => manager.Phonenumber == phonenumber
+            && manager.Password == password).Select(
                 m => new Model.Manager(){
                     Phonenumber = m.Phonenumber,
                     Name = m.Name,
                     Password = m.Password
                 }
             ).ToList();
+        }
+
+        public List<Product> GetProducts(string storeNumber)
+        {
+            /* List <Entity.Storeproduct> products = _context.Storeproducts.
+            Include(p => p.Product).Where(p => p.Storeid == storeNumber).ToList(); */
+            
+            return _context.Products.Where(p => p.Storeid == storeNumber).Select(
+                sp => new Model.Product(){
+                    Name = sp.Name,
+                    Quantity = sp.Stock,
+                    UnitPrice = sp.Unitprice,
+                    StoreID = sp.Storeid
+                }
+            ).ToList();
+            
         }
 
         public List<Model.Store> GetStores(string managerNumber)
