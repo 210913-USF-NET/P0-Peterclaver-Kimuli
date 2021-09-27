@@ -31,7 +31,7 @@ namespace UI
                         SelectStore();
                         break;
                     case "2":
-                        Console.WriteLine("2");
+                        returnOrders();
                         break;
                     case "x":
                         exit = true;
@@ -66,13 +66,34 @@ namespace UI
             {
                 int actualInput = parsedInput - 1;
                 Log.Information("Logging into the store customer menu");
-                MenuFactory.GetMenu("storecustomermenu", storesToSelect[actualInput]).Start();
+                MenuFactory.GetMenu("storecustomermenu", storesToSelect[actualInput], _cust).Start();
             }
             else
             {
                 Console.WriteLine("Invalid input.");
                 goto menu;
             }
+        }
+
+        private void returnOrders(){
+            List<Order> orders = _bl.GetCustomerOrders(_cust.Phonenumber);
+            if(orders.Count == 0 || orders == null)
+            {
+                Console.WriteLine("You have not yet made any orders\n");
+                return;
+            }
+            Console.WriteLine("\nBelow are your orders:");
+            for(int i=0; i<orders.Count; i++)
+            {
+                Console.WriteLine($"[{i + 1}] Order number: {orders[i].Id} Date: {orders[i].OrderDate.ToString("d")}");
+                Console.WriteLine("Items:");
+                for(int t = 0; t < orders[i].Items.Count; t++)
+                {
+                    Console.WriteLine($"{orders[i].Items[t].ProductName} ({orders[i].Items[t].Quantity}) Cost: {orders[i].Items[t].Cost}");
+                }
+                Console.WriteLine($"Total cost: {orders[i].Total}");
+            }
+            Console.WriteLine("\n");
         }
     }
 }

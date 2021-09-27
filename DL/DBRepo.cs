@@ -149,6 +149,7 @@ namespace DL
             
             return _context.Products.Where(p => p.Storeid == storeNumber).Select(
                 sp => new Model.Product(){
+                    Id = sp.Id,
                     Name = sp.Name,
                     Quantity = sp.Stock,
                     UnitPrice = sp.Unitprice,
@@ -175,6 +176,78 @@ namespace DL
                     Number = s.Number,
                     Location = s.Location,
                     Zipcode = s.Zipcode
+                }
+            ).ToList();
+        }
+        public Order AddOrder(Order order)
+        {
+            Entity.Customerorder newOrder = new Entity.Customerorder()
+            {
+                Total = order.Total,
+                Customerphone = order.CustomerPhone,
+                Storeid = order.StoreID,
+                Orderdate = order.OrderDate
+            };
+
+            newOrder = _context.Add(newOrder).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
+
+            return new Model.Order(){
+                Id = newOrder.Id,
+                Total = newOrder.Total,
+                CustomerPhone = newOrder.Customerphone,
+                StoreID = newOrder.Storeid,
+                OrderDate = newOrder.Orderdate
+            };
+        }
+
+        public List<LineItem> AddLineItems(List<LineItem> items)
+        {
+            List<Model.LineItem> addedItems = new List<LineItem>();
+
+            for(int i = 0; i < items.Count; i++)
+            {
+                Entity.Lineitem newItem = new Entity.Lineitem()
+                {
+                    Id = items[i].Id,
+                    Orderid = items[i].OrderId,
+                    Productid = items[i].ProductId,
+                    Productname = items[i].ProductName,
+                    Quantity = items[i].Quantity,
+                    Cost = items[i].Cost
+                };
+
+                newItem = _context.Add(newItem).Entity;
+                _context.SaveChanges();
+                _context.ChangeTracker.Clear();
+
+                addedItems.Add(new Model.LineItem(){
+                    Id = newItem.Id,
+                    OrderId = newItem.Orderid,
+                    ProductId = newItem.Productid,
+                    ProductName = newItem.Productname,
+                    Quantity = newItem.Quantity,
+                    Cost = newItem.Cost
+                });
+            }
+
+            return addedItems;
+        }
+
+        public List<Order> GetCustomerOrders(string customerNumber)
+        {
+            return _context.Customerorders.Include(cn => cn.Lineitems).
+            Where(cn => cn.Customerphone == customerNumber).Select(
+                o => new Model.Order(){
+                    Id = o.Id,
+                    OrderDate = o.Orderdate,
+                    Total = o.Total,
+                    Items = o.Lineitems.Select(i => new Model.LineItem(){
+                        ProductName = i.Productname,
+                        Quantity = i.Quantity,
+                        Cost = i.Cost
+                    }).ToList()
                 }
             ).ToList();
         }

@@ -16,5 +16,8 @@ namespace BL
         void AddToStoreProduct(string storeNumber, int productID);
         List<Product> GetProducts(string storeNumber);
         List<Customer> GetCustomerSearch(string name);
+        Order AddOrder(Order order);
+        List<LineItem> AddLineItems(List<LineItem> items);
+        List <Order> GetCustomerOrders(string customerNumber);
     }
 }

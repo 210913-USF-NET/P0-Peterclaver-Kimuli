@@ -60,5 +60,20 @@ namespace BL
         {
             return _repo.GetCustomerStores();
         }
+
+        public Order AddOrder(Order order)
+        {
+            return _repo.AddOrder(order);
+        }
+
+        public List<LineItem> AddLineItems(List<LineItem> items)
+        {
+            return _repo.AddLineItems(items);
+        }
+
+        public List<Order> GetCustomerOrders(string customerNumber)
+        {
+            return _repo.GetCustomerOrders(customerNumber);
+        }
     }
 }

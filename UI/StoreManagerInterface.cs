@@ -151,6 +151,7 @@ namespace UI
             {
                 Console.WriteLine($"[{i + 1}] {products[i].Name}, In stock: {products[i].Quantity}, Unit Price: {products[i].UnitPrice}");
             }
+            Console.WriteLine("\n");
         }
 
         private void CustomerSearch()

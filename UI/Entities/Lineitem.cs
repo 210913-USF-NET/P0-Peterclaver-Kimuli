@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace DL.Entities
+namespace UI.Entities
 {
     public partial class Lineitem
     {

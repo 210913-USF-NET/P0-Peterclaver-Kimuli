@@ -72,8 +72,22 @@ namespace UI
             switch(menuToReturn.ToLower()){
                 case "storemanagermenu":
                     return new StoreManagerInterface(new CBL(new DBRepo(context)), store);
+                default:
+                    return null;
+            }
+        }
+
+        public static IMenu GetMenu (string menuToReturn, Model.Store store, Model.Customer cust)
+        {
+            string connectionString = File.ReadAllText(@"../Connection.txt");
+            DbContextOptions<ShoppingAppDBContext> options = new DbContextOptionsBuilder
+            <ShoppingAppDBContext>().UseSqlServer(connectionString).Options;
+
+            ShoppingAppDBContext context = new ShoppingAppDBContext(options);
+
+            switch(menuToReturn.ToLower()){
                 case "storecustomermenu":
-                    return new StoreCustomerInterface(new CBL(new DBRepo(context)), store);
+                    return new StoreCustomerInterface(new CBL(new DBRepo(context)), store, cust);
                 default:
                     return null;
             }

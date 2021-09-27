@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace DL.Entities
+namespace UI.Entities
 {
     public partial class ShoppingAppDBContext : DbContext
     {
@@ -124,13 +124,13 @@ namespace DL.Entities
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Orderid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__ORDERI__4E53A1AA");
+                    .HasConstraintName("FK__LINEITEM__ORDERI__42E1EEFE");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Productid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__PRODUC__4F47C5E3");
+                    .HasConstraintName("FK__LINEITEM__PRODUC__43D61337");
             });
 
             modelBuilder.Entity<Manager>(entity =>
