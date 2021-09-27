@@ -104,6 +104,16 @@ namespace DL
             _context.ChangeTracker.Clear();
         }
 
+        public List<Customer> GetCustomerSearch(string name)
+        {
+            return _context.Customers.Where(custName => custName.Name.Contains(name)).Select(
+                c => new Model.Customer(){
+                    Phonenumber = c.Phonenumber,
+                    Name = c.Name
+                }
+            ).ToList();
+        }
+
         public List<Model.Customer> GetLoggedInCustomer(string phonenumber, string password){
             List<Model.Customer> loggedInCust = new List<Model.Customer>();
 
@@ -147,11 +157,20 @@ namespace DL
             ).ToList();
             
         }
-
-        public List<Model.Store> GetStores(string managerNumber)
+        public List<Model.Store> GetManagerStores(string managerNumber)
         {
             return _context.Stores.Where(managerPhone => managerPhone.Managerphone.Contains(managerNumber))
             .Select(
+                s => new Model.Store(){
+                    Number = s.Number,
+                    Location = s.Location,
+                    Zipcode = s.Zipcode
+                }
+            ).ToList();
+        }
+        public List<Model.Store> GetCustomerStores()
+        {
+            return _context.Stores.Select(
                 s => new Model.Store(){
                     Number = s.Number,
                     Location = s.Location,

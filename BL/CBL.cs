@@ -31,9 +31,9 @@ namespace BL
             return _repo.AddStore(store);
         }
 
-        public List<Store> GetStores(string managerNumber)
+        public List<Store> GetManagerStores(string managerNumber)
         {
-            return _repo.GetStores(managerNumber);
+            return _repo.GetManagerStores(managerNumber);
         }
 
         public Product AddProduct(Product product)
@@ -49,6 +49,16 @@ namespace BL
         public List<Product> GetProducts(string storeNumber)
         {
             return _repo.GetProducts(storeNumber);
+        }
+
+        public List<Customer> GetCustomerSearch(string name)
+        {
+            return _repo.GetCustomerSearch(name);
+        }
+
+        public List<Store> GetCustomerStores()
+        {
+            return _repo.GetCustomerStores();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace UI
                         Console.WriteLine("2");
                         break;
                     case "3":
-                        Console.WriteLine("3");
+                        CustomerSearch();
                         break;
                     case "x":
                         exit = true;
@@ -137,7 +137,7 @@ namespace UI
             Console.WriteLine($"You have successfully added {addedProduct.Quantity} {addedProduct.Name} of unit price ${addedProduct.UnitPrice}");
         }
 
-       private void ProductsReturned()
+        private void ProductsReturned()
         {
             //menu:
             List<Product> products = _bl.GetProducts(_store.Number);
@@ -151,21 +151,27 @@ namespace UI
             {
                 Console.WriteLine($"[{i + 1}] {products[i].Name}, In stock: {products[i].Quantity}, Unit Price: {products[i].UnitPrice}");
             }
+        }
 
-            /* string input = Console.ReadLine();
-            int parsedInput;
-            bool parseSuccess = Int32.TryParse(input, out parsedInput);
-            if (parseSuccess && parsedInput >= 0 && parsedInput <= storesToSelect.Count)
+        private void CustomerSearch()
+        {
+            Console.WriteLine("\nPlease enter the name of the customer to search:");
+            string customername = Console.ReadLine();
+
+            List<Customer> returnedCust = _bl.GetCustomerSearch(customername);
+            if(returnedCust.Count == 0 || returnedCust == null)
             {
-                int actualInput = parsedInput - 1;
-                Log.Information("Logging into the store manager menu");
-                MenuFactory.GetMenu("storemanagermenu", storesToSelect[actualInput]).Start();
+                Console.WriteLine("There are currently no customers with that name\n");
+                return;
             }
-            else
+            
+            Console.WriteLine("Search results:");
+
+            for(int i=0; i<returnedCust.Count; i++)
             {
-                Console.WriteLine("Invalid input.");
-                goto menu;
-            } */
+                Console.WriteLine($"[{i + 1}] {returnedCust[i].Name}, Phone number: {returnedCust[i].Phonenumber}");
+            }
+            Console.WriteLine("\n");
         }
     }
 }

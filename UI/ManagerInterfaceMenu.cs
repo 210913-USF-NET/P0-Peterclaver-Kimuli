@@ -94,7 +94,7 @@ namespace UI
         private void SelectStore()
         {
             menu:
-            List<Store> storesToSelect = _bl.GetStores(_manager.Phonenumber);
+            List<Store> storesToSelect = _bl.GetManagerStores(_manager.Phonenumber);
             Console.WriteLine("\nPlease select from the stores below:");
             if(storesToSelect.Count == 0 || storesToSelect == null)
             {
