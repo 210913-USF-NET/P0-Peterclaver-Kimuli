@@ -9,15 +9,27 @@ using Models;
 
 namespace DL
 {
+    /// <summary>
+    /// This is the class that contains methods that interact with the DBContext. It implements the IRepo interface.
+    /// </summary>
     public class DBRepo : IRepo
     {
         private Entity.ShoppingAppDBContext _context;
+        /// <summary>
+        /// This is a constructor of the DBRepo class.
+        /// </summary>
+        /// <param name="context"></param>
         public DBRepo(Entity.ShoppingAppDBContext context)
         {
             _context = context;
         }
 
         //This method adds a new customer to the DB
+        /// <summary>
+        /// This is the method that sign ups the customer
+        /// </summary>
+        /// <param name="cust">Customer Object to be added in the DB</param>
+        /// <returns>Returns an object of a customer that has been successfully added to the DB.</returns>
         public Model.Customer AddCustomer(Model.Customer cust){
             Entity.Customer custToAdd = new Entity.Customer(){
                 Phonenumber = cust.Phonenumber,
@@ -45,6 +57,11 @@ namespace DL
         }
 
         //Add a product to the DB
+        /// <summary>
+        /// This is the method that adds a product to the DB
+        /// </summary>
+        /// <param name="product">Product object to be added in the DB</param>
+        /// <returns>Returns an object of a product that has been successfully added to the DB.</returns>
         public Product AddProduct(Product product)
         {
             Entity.Product newProduct = new Entity.Product()
@@ -68,6 +85,11 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// This is the method used when creating a new store.
+        /// </summary>
+        /// <param name="store">Store object to be added in the DB</param>
+        /// <returns>Returns an object of a store that has been successfully added to the DB.</returns>
         public Store AddStore(Store store)
         {
             Entity.Store storeToAdd = new Entity.Store()
@@ -91,6 +113,11 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// This method is not relevant as of now. Will recheck it later on.
+        /// </summary>
+        /// <param name="storeNumber">Store ID</param>
+        /// <param name="productID">Product ID</param>
         public void AddToStoreProduct(string storeNumber, int productID)
         {
             Entity.Storeproduct storeProduct = new Entity.Storeproduct()
@@ -104,6 +131,11 @@ namespace DL
             _context.ChangeTracker.Clear();
         }
 
+        /// <summary>
+        /// This method is used when a manager is searching for a customer
+        /// </summary>
+        /// <param name="name">Customer name</param>
+        /// <returns>Returns an object of a customer if they exist in the DB.</returns>
         public List<Customer> GetCustomerSearch(string name)
         {
             return _context.Customers.Where(custName => custName.Name.Contains(name)).Select(
@@ -114,6 +146,12 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// This method is used when a customer is logging in the DB.
+        /// </summary>
+        /// <param name="phonenumber">Customer phone number</param>
+        /// <param name="password">Customer password</param>
+        /// <returns>Returns an object of a customer if they exist in the DB.</returns>
         public List<Model.Customer> GetLoggedInCustomer(string phonenumber, string password){
             List<Model.Customer> loggedInCust = new List<Model.Customer>();
 
@@ -130,6 +168,12 @@ namespace DL
             return loggedInCust;
         }
 
+        /// <summary>
+        /// This method is used when a manager is logging in
+        /// </summary>
+        /// <param name="phonenumber">Manager phone number</param>
+        /// <param name="password">Manager password</param>
+        /// <returns>Returns an object of a manager if they exist in the DB</returns>
         public List<Model.Manager> GetManagers(string phonenumber, string password)
         {
             return _context.Managers.Where(manager => manager.Phonenumber == phonenumber
@@ -142,6 +186,11 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// This method returns the products stored in the DB
+        /// </summary>
+        /// <param name="storeNumber">The store ID number</param>
+        /// <returns>Returns a list of products if they exist in the DB</returns>
         public List<Product> GetProducts(string storeNumber)
         {
             /* List <Entity.Storeproduct> products = _context.Storeproducts.
@@ -158,6 +207,11 @@ namespace DL
             ).ToList();
             
         }
+        /// <summary>
+        /// This method returns only the stores that were created by a particular manager
+        /// </summary>
+        /// <param name="managerNumber">The manager's phone number</param>
+        /// <returns>Returns a list of stores if they exist in the DB</returns>
         public List<Model.Store> GetManagerStores(string managerNumber)
         {
             return _context.Stores.Where(managerPhone => managerPhone.Managerphone.Contains(managerNumber))
@@ -169,6 +223,10 @@ namespace DL
                 }
             ).ToList();
         }
+        /// <summary>
+        /// This methods returns from the DB customers that have ordered from a particular
+        /// </summary>
+        /// <returns>Returns a list of customer that ordered from a store if they exist in the DB</returns>
         public List<Model.Store> GetCustomerStores()
         {
             return _context.Stores.Select(
@@ -179,6 +237,11 @@ namespace DL
                 }
             ).ToList();
         }
+        /// <summary>
+        /// This method adds a customer order to the DB.
+        /// </summary>
+        /// <param name="order">Order object to be added to the DB</param>
+        /// <returns>The order object added to the DB</returns>
         public Order AddOrder(Order order)
         {
             Entity.Customerorder newOrder = new Entity.Customerorder()
@@ -202,6 +265,11 @@ namespace DL
             };
         }
 
+        /// <summary>
+        /// This method adds the order items to the DB
+        /// </summary>
+        /// <param name="items">Items list to add to the DB</param>
+        /// <returns>Returns a list of items successfully added to the DB</returns>
         public List<LineItem> AddLineItems(List<LineItem> items)
         {
             List<Model.LineItem> addedItems = new List<LineItem>();
@@ -235,6 +303,11 @@ namespace DL
             return addedItems;
         }
 
+        /// <summary>
+        /// This method returns the orders that were made by a particular customer sorted by Date.
+        /// </summary>
+        /// <param name="customerNumber">Customer phone number</param>
+        /// <returns>A list of orders that were made by a customer sorted by Date.</returns>
         public List<Order> GetCustomerOrders(string customerNumber)
         {
             return _context.Customerorders.OrderBy(o =>o.Orderdate).Include(cn => cn.Lineitems).
@@ -253,6 +326,11 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// This method returns the orders that were made by a particular customer sorted by Total cost.
+        /// </summary>
+        /// <param name="customerNumber">Customer phone number</param>
+        /// <returns>A list of orders that were made by a customer sorted by Total cost.</returns>
         public List<Order> GetCustomerOrdersByCost(string customerNumber)
         {
             return _context.Customerorders.OrderBy(o =>o.Total).Include(cn => cn.Lineitems).
@@ -271,6 +349,11 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// This method returns the orders that were made to a particular store sorted by Date.
+        /// </summary>
+        /// <param name="storeNumber">Store ID</param>
+        /// <returns>A list of orders that were made to a particular store sorted by Date.</returns>
         public List<Order> GetStoreOrders(string storeNumber)
         {
             return _context.Customerorders.OrderBy(o =>o.Orderdate).Include(cn => cn.Lineitems).
@@ -289,6 +372,11 @@ namespace DL
                 }
             ).ToList();
         }
+        /// <summary>
+        /// This method returns the orders that were made to a particular store sorted by Total cost.
+        /// </summary>
+        /// <param name="storeNumber">Store ID</param>
+        /// <returns>A list of orders that were made to a particular store sorted by Total cost.</returns>
         public List<Order> GetStoreOrdersByCost(string storeNumber)
         {
             return _context.Customerorders.OrderBy(o =>o.Total).Include(cn => cn.Lineitems).
@@ -308,6 +396,10 @@ namespace DL
             ).ToList();
         }
 
+        /// <summary>
+        /// This method is used when a manager is changing the quantity number of a product.
+        /// </summary>
+        /// <param name="product">The product object to be changed in the DB</param>
         public void UpdateProduct(Product product)
         {
             Entity.Product updateProduct = new Entity.Product()

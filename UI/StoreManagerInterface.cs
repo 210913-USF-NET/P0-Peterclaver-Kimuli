@@ -147,6 +147,7 @@ namespace UI
                 Console.WriteLine("There are currently no items in this store\n");
                 return;
             }
+            Log.Information("Displaying Products...");
             for(int i=0; i<products.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}] {products[i].Name}, In stock: {products[i].Quantity}, Unit Price: {products[i].UnitPrice}");
@@ -226,6 +227,7 @@ namespace UI
                 return;
             }
             Console.WriteLine("\nBelow are the Store orders:");
+            Log.Information("Displaying orders...");
             for(int i=0; i<orders.Count; i++)
             {
                 Console.WriteLine($"[{i + 1}] Order number: {orders[i].Id} Customer:{orders[i].CustomerName}  Date: {orders[i].OrderDate.ToString("d")}");
