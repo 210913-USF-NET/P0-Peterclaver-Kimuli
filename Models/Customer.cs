@@ -1,5 +1,6 @@
 // This is the customer model
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Serilog;
 
@@ -16,6 +17,7 @@ namespace Models
             this.Password2 = password2;
         }
 
+        public List<Order> Orders{get; set;}
         //creating name validation
         private string _name;
 

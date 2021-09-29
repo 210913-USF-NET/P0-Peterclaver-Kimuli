@@ -18,5 +18,9 @@ namespace DL
         Order AddOrder(Order order);
         List<LineItem> AddLineItems(List<LineItem> items);
         List <Order> GetCustomerOrders(string customerNumber);
+        List <Order> GetCustomerOrdersByCost(string customerNumber);
+        List<Order> GetStoreOrders(string storeNumber);
+        List<Order> GetStoreOrdersByCost(string storeNumber);
+        void UpdateProduct(Product product);
     }
 }

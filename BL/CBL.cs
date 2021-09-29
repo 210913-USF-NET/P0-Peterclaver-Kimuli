@@ -75,5 +75,24 @@ namespace BL
         {
             return _repo.GetCustomerOrders(customerNumber);
         }
+        public List<Order> GetCustomerOrdersByCost(string customerNumber)
+        {
+            return _repo.GetCustomerOrdersByCost(customerNumber);
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            _repo.UpdateProduct(product);
+        }
+
+        public List<Order> GetStoreOrders(string storeNumber)
+        {
+            return _repo.GetStoreOrders(storeNumber);
+        }
+        public List<Order> GetStoreOrdersByCost(string storeNumber)
+        {
+            return _repo.GetStoreOrdersByCost(storeNumber);
+        }
+
     }
 }

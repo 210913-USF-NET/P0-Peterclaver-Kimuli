@@ -22,8 +22,8 @@ namespace UI
             bool exit = false;
 
             do{
-                Console.WriteLine("1. Type 1 to select a store");
-                Console.WriteLine("2. Type 2 to check your previous orders... type x to exit!");
+                Console.WriteLine("[1] Type 1 to select a store");
+                Console.WriteLine("[2] Type 2 to check your previous orders... type x to exit!");
 
                 switch(Console.ReadLine())
                 {
@@ -85,15 +85,39 @@ namespace UI
             Console.WriteLine("\nBelow are your orders:");
             for(int i=0; i<orders.Count; i++)
             {
-                Console.WriteLine($"[{i + 1}] Order number: {orders[i].Id} Date: {orders[i].OrderDate.ToString("d")}");
+                Console.WriteLine($"[{i + 1}] Store:{orders[i].StoreID} Order number: {orders[i].Id} Date: {orders[i].OrderDate.ToString("d")}");
                 Console.WriteLine("Items:");
                 for(int t = 0; t < orders[i].Items.Count; t++)
                 {
                     Console.WriteLine($"{orders[i].Items[t].ProductName} ({orders[i].Items[t].Quantity}) Cost: {orders[i].Items[t].Cost}");
                 }
                 Console.WriteLine($"Total cost: {orders[i].Total}");
+                Console.WriteLine("------------------------------------");
             }
-            Console.WriteLine("\n");
+            Console.WriteLine("Type c to have your orders sorted by Total cost... or any other key to exit.");
+            string input = Console.ReadLine();
+            if(input == "C" || input == "c")
+            {
+                List<Order> orders_c = _bl.GetCustomerOrdersByCost(_cust.Phonenumber);
+                if(orders_c.Count == 0 || orders_c == null)
+                {
+                    Console.WriteLine("You have not yet made any orders\n");
+                    return;
+                }
+                Console.WriteLine("\nBelow are your orders sorted by cost:");
+                for(int i=0; i<orders_c.Count; i++)
+                {
+                    Console.WriteLine($"[{i + 1}] Store:{orders_c[i].StoreID} Order number: {orders_c[i].Id} Date: {orders_c[i].OrderDate.ToString("d")}");
+                    Console.WriteLine("Items:");
+                    for(int t = 0; t < orders_c[i].Items.Count; t++)
+                    {
+                        Console.WriteLine($"{orders_c[i].Items[t].ProductName} ({orders_c[i].Items[t].Quantity}) Cost: {orders_c[i].Items[t].Cost}");
+                    }
+                    Console.WriteLine($"Total cost: {orders_c[i].Total}");
+                    Console.WriteLine("------------------------------------\n");
+                }
+            }
+            
         }
     }
 }

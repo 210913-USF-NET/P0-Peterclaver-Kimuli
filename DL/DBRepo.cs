@@ -237,19 +237,91 @@ namespace DL
 
         public List<Order> GetCustomerOrders(string customerNumber)
         {
-            return _context.Customerorders.Include(cn => cn.Lineitems).
+            return _context.Customerorders.OrderBy(o =>o.Orderdate).Include(cn => cn.Lineitems).
             Where(cn => cn.Customerphone == customerNumber).Select(
                 o => new Model.Order(){
                     Id = o.Id,
                     OrderDate = o.Orderdate,
                     Total = o.Total,
+                    StoreID = o.Storeid,
                     Items = o.Lineitems.Select(i => new Model.LineItem(){
                         ProductName = i.Productname,
                         Quantity = i.Quantity,
-                        Cost = i.Cost
+                        Cost = i.Cost,
                     }).ToList()
                 }
             ).ToList();
+        }
+
+        public List<Order> GetCustomerOrdersByCost(string customerNumber)
+        {
+            return _context.Customerorders.OrderBy(o =>o.Total).Include(cn => cn.Lineitems).
+            Where(cn => cn.Customerphone == customerNumber).Select(
+                o => new Model.Order(){
+                    Id = o.Id,
+                    OrderDate = o.Orderdate,
+                    Total = o.Total,
+                    StoreID = o.Storeid,
+                    Items = o.Lineitems.Select(i => new Model.LineItem(){
+                        ProductName = i.Productname,
+                        Quantity = i.Quantity,
+                        Cost = i.Cost,
+                    }).ToList()
+                }
+            ).ToList();
+        }
+
+        public List<Order> GetStoreOrders(string storeNumber)
+        {
+            return _context.Customerorders.OrderBy(o =>o.Orderdate).Include(cn => cn.Lineitems).
+            Where(cn => cn.Storeid == storeNumber).Select(
+                o => new Model.Order(){
+                    Id = o.Id,
+                    OrderDate = o.Orderdate,
+                    Total = o.Total,
+                    StoreID = o.Storeid,
+                    CustomerName = o.CustomerphoneNavigation.Name,
+                    Items = o.Lineitems.Select(i => new Model.LineItem(){
+                        ProductName = i.Productname,
+                        Quantity = i.Quantity,
+                        Cost = i.Cost,
+                    }).ToList()
+                }
+            ).ToList();
+        }
+        public List<Order> GetStoreOrdersByCost(string storeNumber)
+        {
+            return _context.Customerorders.OrderBy(o =>o.Total).Include(cn => cn.Lineitems).
+            Where(cn => cn.Storeid == storeNumber).Select(
+                o => new Model.Order(){
+                    Id = o.Id,
+                    OrderDate = o.Orderdate,
+                    Total = o.Total,
+                    StoreID = o.Storeid,
+                    CustomerName = o.CustomerphoneNavigation.Name,
+                    Items = o.Lineitems.Select(i => new Model.LineItem(){
+                        ProductName = i.Productname,
+                        Quantity = i.Quantity,
+                        Cost = i.Cost,
+                    }).ToList()
+                }
+            ).ToList();
+        }
+
+        public void UpdateProduct(Product product)
+        {
+            Entity.Product updateProduct = new Entity.Product()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Stock = product.Quantity,
+                Unitprice = product.UnitPrice,
+                Storeid = product.StoreID
+            };
+
+            updateProduct = _context.Products.Update(updateProduct).Entity;
+            _context.SaveChanges();
+            _context.ChangeTracker.Clear();
         }
     }
 }

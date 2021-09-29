@@ -23,8 +23,8 @@ namespace UI
             bool exit = false;
             do
             {
-                Console.WriteLine("\n1. Type 1 to select a store location");
-                Console.WriteLine("2. Type 2 to create a new location... or type x to exit");
+                Console.WriteLine("\n[1] Type 1 to select a store location");
+                Console.WriteLine("[2] Type 2 to create a new location... or type x to exit");
 
                 switch(Console.ReadLine())
                 {

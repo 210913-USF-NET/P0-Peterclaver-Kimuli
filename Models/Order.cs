@@ -21,5 +21,6 @@ namespace Models
         public string StoreID{get; set;}
         public DateTime OrderDate{get; set;}
         public List<LineItem> Items{get; set;}
+        public string CustomerName { get; set; }
     }
 }

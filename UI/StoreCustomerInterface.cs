@@ -3,7 +3,6 @@ using Models;
 using BL;
 using System.Collections.Generic;
 using Serilog;
-using System.Text.RegularExpressions;
 
 namespace UI
 {
@@ -27,8 +26,8 @@ namespace UI
             do
             {
                 Console.WriteLine("Navigate the store using menu below;");
-                Console.WriteLine("1. Type 1 to place an order.");
-                Console.WriteLine("2. Type x to exit.");
+                Console.WriteLine("[1] Type 1 to place an order.");
+                Console.WriteLine("[2] Type x to exit.");
 
                 switch(Console.ReadLine())
                 {
@@ -95,6 +94,8 @@ namespace UI
                 {
                     addedItem.Quantity = parsedQuantity;
                     newQuantity = products[actualInput].Quantity - parsedQuantity;
+                    products[actualInput].Quantity = newQuantity;
+                    _bl.UpdateProduct(products[actualInput]);
                 }
                 else
                 {

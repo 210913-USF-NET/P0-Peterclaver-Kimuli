@@ -1,0 +1,18 @@
+2021-09-29 01:59:21.084 -04:00 [INF] Application closing...
+2021-09-29 02:00:03.815 -04:00 [INF] Application Starting...
+2021-09-29 02:00:27.464 -04:00 [INF] Creating Account
+2021-09-29 02:01:03.494 -04:00 [INF] Account successfully created!
+2021-09-29 02:01:17.349 -04:00 [INF] Logging into the store customer menu
+2021-09-29 02:01:52.269 -04:00 [INF] Order added Successfully!
+2021-09-29 02:02:08.207 -04:00 [INF] Logging into the store customer menu
+2021-09-29 02:02:19.895 -04:00 [INF] Order added Successfully!
+2021-09-29 02:02:30.030 -04:00 [INF] Logging in...
+2021-09-29 02:02:43.694 -04:00 [INF] 
+Successfully Logged in!
+2021-09-29 02:02:48.016 -04:00 [INF] Logging into the store customer menu
+2021-09-29 02:02:58.562 -04:00 [INF] Order added Successfully!
+2021-09-29 02:03:06.885 -04:00 [INF] Logging in...
+2021-09-29 02:03:15.534 -04:00 [INF] 
+Successfully Logged in!
+2021-09-29 02:03:23.376 -04:00 [INF] Logging into the store manager menu
+2021-09-29 02:09:15.520 -04:00 [INF] Application closing...

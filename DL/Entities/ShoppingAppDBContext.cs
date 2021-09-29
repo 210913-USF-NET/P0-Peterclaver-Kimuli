@@ -105,7 +105,7 @@ namespace DL.Entities
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Cost)
-                    .HasColumnType("decimal(18, 0)")
+                    .HasColumnType("decimal(10, 2)")
                     .HasColumnName("COST");
 
                 entity.Property(e => e.Orderid).HasColumnName("ORDERID");
@@ -124,13 +124,13 @@ namespace DL.Entities
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Orderid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__ORDERI__4E53A1AA");
+                    .HasConstraintName("FK__LINEITEM__ORDERI__5224328E");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Lineitems)
                     .HasForeignKey(d => d.Productid)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LINEITEM__PRODUC__4F47C5E3");
+                    .HasConstraintName("FK__LINEITEM__PRODUC__531856C7");
             });
 
             modelBuilder.Entity<Manager>(entity =>
